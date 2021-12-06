@@ -1,0 +1,6 @@
+BasisOfRec,EVENT_YEAR,latitude,longitude,BINOMIAL,PRESENCE,ORIGIN,SEASONAL,CATALOG_NO,SPATIALREF,CITATION,COMPILER,NUMBER,COLLECTOR,YEAR,DATA_SENS,SOURCE,ISSUES,datasetKey
+PreservedSpecimen,1996,19.009466,99.552228,Arisaema maxwellii,1,1,1,Maxwell J.F. ;904,WGS84,"RBG, Kew","RBG, Kew",904,Maxwell J.F.   ,2020,NA,NA,NA,NA
+PreservedSpecimen,,16.061237,99.211726,Arisaema maxwellii,1,1,1,Sizemore M. ;s.n.,WGS84,"RBG, Kew","RBG, Kew",s.n.,Sizemore M.   ,2020,NA,NA,NA,NA
+PreservedSpecimen,,19.163219,99.578513,Arisaema maxwellii,1,1,1,Maxwell J.F. ;s.n.,WGS84,"RBG, Kew","RBG, Kew",s.n.,Maxwell J.F.   ,2020,NA,NA,NA,NA
+PreservedSpecimen,,18.821149,98.900784,Arisaema maxwellii,1,1,1,Maxwell J.F. ;629,WGS84,"RBG, Kew","RBG, Kew",629,Maxwell J.F.   ,2020,NA,NA,NA,NA
+PreservedSpecimen,,18.7575,99.978333,Arisaema maxwellii,1,1,1,Put ;4020,WGS84,"RBG, Kew","RBG, Kew",4020,Put   ,2020,NA,NA,NA,NA

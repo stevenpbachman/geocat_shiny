@@ -1,0 +1,5 @@
+BasisOfRec,EVENT_YEAR,latitude,longitude,BINOMIAL,PRESENCE,ORIGIN,SEASONAL,CATALOG_NO,SPATIALREF,CITATION,COMPILER,recordNumber,recordedBy,YEAR,DATA_SENS,SOURCE,ISSUES,datasetKey
+v,2015,49.81694,17.26806,Epipactis greuteri,1,1,1,Batoušek P. ;s.n.,WGS84,"RBG, Kew","RBG, Kew",s.n.,Batoušek P.   ,2020,NA,NA,NA,NA
+v,2002,49.33167,16.73361,Epipactis greuteri,1,1,1,Unar J ;s.n.,WGS84,"RBG, Kew","RBG, Kew",s.n.,Unar J   ,2020,NA,NA,NA,NA
+v,2000,43.799551,11.803285,Epipactis greuteri,1,1,1,Romolini R.  ;s.n.,WGS84,"RBG, Kew","RBG, Kew",s.n.,Romolini R.    ,2020,NA,NA,NA,NA
+,1999,43.730966,11.553028,Epipactis greuteri,1,1,1, ;s.n.,WGS84,"RBG, Kew","RBG, Kew",s.n.,   ,2020,NA,NA,NA,NA
