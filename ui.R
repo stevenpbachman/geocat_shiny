@@ -15,27 +15,27 @@ library(shinyWidgets)
 
 # results - merge csv import and gbif
 # make sure sequence works when analysis is on/off
-# input button to let user choose number of gbif points
-# use fluid row to separate the input from the results
-# excel sheet/ powerpoint with ui and server functions mapped to keep track of logic
-# add tab and batch tab, and About info
-# add more items to results - Red List categories, number of occurrences?
-# draw convex hull?
-# add native range - POWO ID?
+
 # add pop up metadata in leaflet map when user clicks points
+#   need standard tempalte file to match to so GBIF and csv is the same?
 # select species from GBIF should be drop down? or just go with best guess see rapid LC?
 # validate csv < handle when csv doesn't have lat long cols, or valid data.
 # Import GBIF data << selectize from list of options? or best match?
 # edit points << leaflet extra has draw option, but not sure how to track points
-# export csv - results and points, various formats? << see Rapid LC
-# batch process << see Rapid LC
-# add loading popups?
+# add loading widgets?
+# change user and gbif points in map legend to match point colours
 
 # other issues:
 # how to deal with shiny app turning off when not in use
 # RCAT2 needs to be on CRAN for shiny geocat to be deployed
 # read mastering shiny book -
 # possibly hire shiny developer?
+
+# What other options can we add with R scripts?
+# Justin's AOO sampling
+# Buffer points by X distance
+# Random sample of points to generate EOO - range. Make a small chart in results
+# AOH -  may be hard to execute with large raster files
 
 source(here("functions.R"))
 
@@ -66,9 +66,10 @@ ui <-
             "Query GBIF",
             # Input: select a species from GBIF
             helpText("Enter species name to search GBIF occurrences"),
-            textInput("searchGBIF", "Enter species name"),
+            textInput("GBIFname", "Enter species name"),
             helpText("Maximum number of GBIF occurrences (default 1000)"),
             textInput("GBIFmax", "Enter number", value = 1000, width = '100px'),
+            actionButton("searchGBIF", "Query GBIF")
             
           )
           

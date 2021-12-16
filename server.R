@@ -17,18 +17,32 @@ server <- function(input, output) {
   
   # react to the GBIF search box being used
   # then trigger code to select best match and get occurrence data
-  gbifpointsInput <- eventReactive(input$searchGBIF, {
-    req(input$searchGBIF)
-    gbif_keys <- name_search(input$searchGBIF)
+  gbifpointsInput <- eventReactive(list(input$GBIFname,input$GBIFmax), {
+    req(input$GBIFname)
+    gbif_keys <- name_search(input$GBIFname)
     gbif_key <- gbif_keys$GBIF_key
     get_gbif_points(gbif_key, input$GBIFmax)
     
   })
   
+  # make a polygon from imported csv points
+  polyInput = eventReactive(input$file1, {
+    df <- read.csv(input$file1$datapath)  
+    poly = df %>%
+      st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>%
+      st_combine()  %>%
+      st_convex_hull()  
+  })
+    
+  
   # controls the analysis on/off button
   # when triggered, it should take the data (only user csv at the moment)
   # and run the EOO/AOO analysis
   switchon = eventReactive(input$Analysis, {
+    
+    # catch when either one or both data inputs exist
+    # if else?
+    
     thedata = csvpointsInput()
     lldata = thedata %>%
       dplyr::select(longitude, latitude)
@@ -48,6 +62,8 @@ server <- function(input, output) {
             format(round(as.numeric(theAOO)), big.mark = ","),
             "(km squared)")
     HTML(paste(str1, str2, sep = '<br/>'))
+
+
     #renderUI({
     #expression("My Title"^2))
     
@@ -128,7 +144,7 @@ server <- function(input, output) {
         "Open Topo Map",
         "ESRI Open Street map"
       ),
-      overlayGroups = ("View Points"),
+      overlayGroups = c("User points", "GBIF points"),
       options = layersControlOptions(collapsed = FALSE)
     )
     
@@ -151,7 +167,7 @@ server <- function(input, output) {
       
       # add markers from the data
       addCircleMarkers(
-        group = "View Points",
+        group = "User points",
         lng = ~ longitude,
         lat = ~ latitude,
         radius = 7,
@@ -161,19 +177,25 @@ server <- function(input, output) {
         fill = T,
         fillColor = "#0070ff"
       ) 
+  })
     
-    # TO DO - add convex hull graphics to visualise EOO
-    # add convex hull to illustrate EOO
-    # below not working
-    #%>%
-    #  addPolygons(data %>%
-    #              st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>%
-    #              st_combine()  %>%
-    #              st_convex_hull())
-    #
-      })
+  # proxy map to add polygon
+  observeEvent(input$Analysis, { 
+    
+    leafletProxy("mymap",data = polyInput()) %>%
+      
+      # clear previous polygons
+      clearShapes() %>%
+      
+      # add polygons input from csv
+      addPolygons()
+    
+      # TO DO - add AOO cells?
   
+  })
+    
   # proxy map to add gbif points
+  #observeEvent(input$searchGBIF, {
   observeEvent(input$searchGBIF, {
     leafletProxy("mymap", data = gbifpointsInput()) %>%
       
@@ -187,7 +209,7 @@ server <- function(input, output) {
       
       # add markers from the data
       addCircleMarkers(
-        group = "View Points",
+        group = "GBIF points",
         lng = ~ DEC_LONG,
         lat = ~ DEC_LAT,
         radius = 7,
